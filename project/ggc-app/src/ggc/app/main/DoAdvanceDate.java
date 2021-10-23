@@ -29,5 +29,4 @@ class DoAdvanceDate extends Command<WarehouseManager> {
       throw new InvalidDateException(integerField("amount"));
     }
   }
-
 }

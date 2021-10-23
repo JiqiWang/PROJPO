@@ -3,6 +3,8 @@ package ggc;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
+
 import ggc.exceptions.BadEntryException;
 import ggc.exceptions.ImportFileException;
 import ggc.exceptions.MissingFileAssociationException;
@@ -67,4 +69,11 @@ public class WarehouseManager {
     return _warehouse;
   }
 
+  public int displayDate(){
+    return _warehouse.getDate();
+  }
+
+  //public void advanceDate(int amount){
+  //  _warehouse.advanceDate(amount);
+  //}
 }

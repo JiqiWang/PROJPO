@@ -11,11 +11,12 @@ class DoDisplayDate extends Command<WarehouseManager> {
 
   DoDisplayDate(WarehouseManager receiver) {
     super(Label.SHOW_DATE, receiver);
+
   }
 
   @Override
   public final void execute() throws CommandException {
     //FIXME implement command
+    _display.popup(Message.currentDate(_receiver.getCurrentWarehouse().getDate()));
   }
-
 }
