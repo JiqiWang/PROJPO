@@ -13,6 +13,8 @@ import ggc.exceptions.UnavailableFileException;
 //FIXME import classes (cannot import from pt.tecnico or ggc.app)
 
 /** Façade for access. */
+
+//*testar
 public class WarehouseManager {
 
   /** Name of file storing current store. */
