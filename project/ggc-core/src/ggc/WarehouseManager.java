@@ -69,11 +69,4 @@ public class WarehouseManager {
     return _warehouse;
   }
 
-  public int displayDate(){
-    return _warehouse.getDate();
-  }
-
-  //public void advanceDate(int amount){
-  //  _warehouse.advanceDate(amount);
-  //}
 }

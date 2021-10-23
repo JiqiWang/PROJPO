@@ -45,7 +45,11 @@ public class Warehouse implements Serializable {
 
   public void advanceDate(int amount) throws InvalidDateExceptionCore { 
     // should probably add another exception, InvalidAmountException for example
-    setDate(_date + amount);
+    if(amount < 0){
+      throw new InvalidDateExceptionCore();
+    } else {
+      setDate(_date + amount);
+    }
   }
 
 }
