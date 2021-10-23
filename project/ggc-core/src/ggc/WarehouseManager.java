@@ -14,7 +14,6 @@ import ggc.exceptions.UnavailableFileException;
 
 /** Façade for access. */
 
-//*testar
 public class WarehouseManager {
 
   /** Name of file storing current store. */
