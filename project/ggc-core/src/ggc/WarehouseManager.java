@@ -2,6 +2,8 @@ package ggc;
 
 //FIXME import classes (cannot import from pt.tecnico or ggc.app)
 
+//caralhoooooooooooooooooooooooooo
+
 /** Façade for access. */
 public class WarehouseManager {
 
