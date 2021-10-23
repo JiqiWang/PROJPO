@@ -63,4 +63,8 @@ public class WarehouseManager {
     }
   }
 
+  public Warehouse getCurrentWarehouse(){
+    return _warehouse;
+  }
+
 }
