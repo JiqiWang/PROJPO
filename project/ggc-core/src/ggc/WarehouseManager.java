@@ -1,5 +1,13 @@
 package ggc;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import ggc.exceptions.BadEntryException;
+import ggc.exceptions.ImportFileException;
+import ggc.exceptions.MissingFileAssociationException;
+import ggc.exceptions.UnavailableFileException;
+
 //FIXME import classes (cannot import from pt.tecnico or ggc.app)
 
 /** Façade for access. */
@@ -50,7 +58,7 @@ public class WarehouseManager {
   public void importFile(String textfile) throws ImportFileException {
     try {
 	    _warehouse.importFile(textfile);
-    } catch (IOException | BadEntryException /* FIXME maybe other exceptions */ e) {
+    } catch (IOException | BadEntryException /* maybe other exceptions */ e) {
 	    throw new ImportFileException(textfile);
     }
   }

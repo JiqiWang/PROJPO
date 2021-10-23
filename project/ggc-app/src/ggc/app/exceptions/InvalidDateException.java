@@ -1,7 +1,5 @@
 package ggc.app.exceptions;
 
-import java.util.ArrayList;
-
 import pt.tecnico.uilib.menus.CommandException;
 
 /** Exception for date-related problems. */
