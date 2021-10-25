@@ -6,7 +6,9 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import ggc.exceptions.BadEntryException;
+import ggc.exceptions.DuplicatePartnerKeyExceptionCore;
 import ggc.exceptions.InvalidDateExceptionCore;
+import ggc.partners.Partner;
 
 // FIXME import classes (cannot import from pt.tecnico or ggc.app)
 
@@ -19,6 +21,8 @@ public class Warehouse implements Serializable {
 
   /** Serial number for serialization. */
   private static final long serialVersionUID = 202109192006L;
+
+  private HashMap<String, Partner> _partners = new HashMap<>();
   
   // FIXME define attributes
   // FIXME define contructor(s)
@@ -53,5 +57,17 @@ public class Warehouse implements Serializable {
       setDate(_date + amount);
     }
   }
+
+  public void registerPartner(String id, String name, String address) throws DuplicatePartnerKeyExceptionCore {
+
+    if(_partners.keySet().contains(id)){
+      throw new DuplicatePartnerKeyExceptionCore();
+    }
+    
+    Partner p = new Partner(id, name, address);
+    _partners.put(id, p);
+  }
+
+
 
 }

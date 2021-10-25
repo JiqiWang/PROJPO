@@ -6,6 +6,7 @@ import java.io.IOException;
 // import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
 
 import ggc.exceptions.BadEntryException;
+import ggc.exceptions.DuplicatePartnerKeyExceptionCore;
 import ggc.exceptions.ImportFileException;
 import ggc.exceptions.InvalidDateExceptionCore;
 import ggc.exceptions.MissingFileAssociationException;
@@ -77,6 +78,10 @@ public class WarehouseManager {
 
   public void advanceDate(int amount) throws InvalidDateExceptionCore {
     getCurrentWarehouse().advanceDate(amount);
+  }
+
+  public void registerPartner(String id, String name, String address) throws DuplicatePartnerKeyExceptionCore {
+    getCurrentWarehouse().registerPartner(id, name, address);
   }
 
 }
