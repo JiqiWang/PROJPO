@@ -3,6 +3,8 @@ package ggc;
 import java.io.IOException;
 import java.io.Serializable;
 
+import java.util.HashMap;
+
 import ggc.exceptions.BadEntryException;
 import ggc.exceptions.InvalidDateExceptionCore;
 
@@ -17,7 +19,7 @@ public class Warehouse implements Serializable {
 
   /** Serial number for serialization. */
   private static final long serialVersionUID = 202109192006L;
-
+  
   // FIXME define attributes
   // FIXME define contructor(s)
   // FIXME define methods

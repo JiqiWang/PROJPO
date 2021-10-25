@@ -3,10 +3,13 @@ package ggc;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
+import ggc.app.exceptions.InvalidDateException;
+
+// import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
 
 import ggc.exceptions.BadEntryException;
 import ggc.exceptions.ImportFileException;
+import ggc.exceptions.InvalidDateExceptionCore;
 import ggc.exceptions.MissingFileAssociationException;
 import ggc.exceptions.UnavailableFileException;
 
@@ -68,6 +71,14 @@ public class WarehouseManager {
 
   public Warehouse getCurrentWarehouse(){
     return _warehouse;
+  }
+
+  public int displayDate(){
+    return getCurrentWarehouse().getDate();
+  }
+
+  public void advanceDate(int amount) throws InvalidDateExceptionCore {
+    getCurrentWarehouse().advanceDate(amount);
   }
 
 }
