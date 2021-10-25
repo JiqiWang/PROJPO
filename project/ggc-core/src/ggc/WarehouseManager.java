@@ -3,8 +3,6 @@ package ggc;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import ggc.app.exceptions.InvalidDateException;
-
 // import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
 
 import ggc.exceptions.BadEntryException;
