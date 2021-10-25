@@ -2,6 +2,7 @@ package ggc;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 // import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
 
@@ -11,6 +12,7 @@ import ggc.exceptions.ImportFileException;
 import ggc.exceptions.InvalidDateExceptionCore;
 import ggc.exceptions.MissingFileAssociationException;
 import ggc.exceptions.UnavailableFileException;
+import ggc.exceptions.UnknownPartnerKeyExceptionCore;
 
 //FIXME import classes (cannot import from pt.tecnico or ggc.app)
 
@@ -82,6 +84,14 @@ public class WarehouseManager {
 
   public void registerPartner(String id, String name, String address) throws DuplicatePartnerKeyExceptionCore {
     getCurrentWarehouse().registerPartner(id, name, address);
+  }
+
+  public ArrayList<String> allPartners(){
+    return getCurrentWarehouse().getAllPartners();
+  }
+
+  public String findPartner(String id) throws UnknownPartnerKeyExceptionCore {
+    return getCurrentWarehouse().getPartner(id);
   }
 
 }

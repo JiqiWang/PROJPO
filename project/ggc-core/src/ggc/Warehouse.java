@@ -2,12 +2,13 @@ package ggc;
 
 import java.io.IOException;
 import java.io.Serializable;
-
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.TreeMap;
 
 import ggc.exceptions.BadEntryException;
 import ggc.exceptions.DuplicatePartnerKeyExceptionCore;
 import ggc.exceptions.InvalidDateExceptionCore;
+import ggc.exceptions.UnknownPartnerKeyExceptionCore;
 import ggc.partners.Partner;
 
 // FIXME import classes (cannot import from pt.tecnico or ggc.app)
@@ -22,7 +23,8 @@ public class Warehouse implements Serializable {
   /** Serial number for serialization. */
   private static final long serialVersionUID = 202109192006L;
 
-  private HashMap<String, Partner> _partners = new HashMap<>();
+  // A TreeMap is used so the IDs are inserted by alphabetical order.
+  private TreeMap<String, Partner> _partners = new TreeMap<>();
   
   // FIXME define attributes
   // FIXME define contructor(s)
@@ -68,6 +70,21 @@ public class Warehouse implements Serializable {
     _partners.put(id, p);
   }
 
+  public String getPartner(String id) throws UnknownPartnerKeyExceptionCore {
+    if(!_partners.keySet().contains(id)){
+      throw new UnknownPartnerKeyExceptionCore();
+    }
 
+    return _partners.get(id).buildAttributesString();
+  }
+
+  public ArrayList<String> getAllPartners(){
+    // maybe sort the IDs by ACTUAL alphabetic order (accents included) ? FIXME i guess
+    ArrayList<String> result = new ArrayList<>();
+
+    _partners.values().stream().forEach(o->{result.add(o.buildAttributesString());});
+
+    return result;
+  }
 
 }

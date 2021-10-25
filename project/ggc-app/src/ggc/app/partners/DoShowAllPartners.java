@@ -2,6 +2,7 @@ package ggc.app.partners;
 
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
+
 import ggc.WarehouseManager;
 //FIXME import classes
 
@@ -16,7 +17,7 @@ class DoShowAllPartners extends Command<WarehouseManager> {
 
   @Override
   public void execute() throws CommandException {
-    //FIXME implement command
+    _receiver.allPartners().stream().forEach(o->{_display.popup(o);});
   }
 
 }
