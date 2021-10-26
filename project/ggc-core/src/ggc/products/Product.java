@@ -34,5 +34,6 @@ public class Product implements Serializable {
     }
 
     public String buildAttributesString(){
-        return String.format("%s|%s|%s", getID(), getPrice(), getStock());    }
+        return String.format("%s|%s|%s", getID(), getPrice(), getStock());
+    }
 }
