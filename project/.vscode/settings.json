@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "ggc-app/src",
+        "ggc-core/src",
+        "po-uilib/src"
+    ]
+}
