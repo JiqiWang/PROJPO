@@ -1,6 +1,6 @@
 GGC_CORE_PATH=./project/ggc-core
 GGC_APP_PATH=./project/ggc-app
-CLASSPATH=/Users/guilhermealmeida/Documents/IST/LEIC/2º\ Ano/1º\ Semestre/PO/Project/PROJPO//project/po-uilib/po-uilib.jar:/Users/guilhermealmeida/Documents/IST/LEIC/2º\ Ano/1º\ Semestre/PO/Project/PROJPO//project/ggc-app/ggc-app.jar:/Users/guilhermealmeida/Documents/IST/LEIC/2º\ Ano/1º\ Semestre/PO/Project/PROJPO//project/ggc-core/ggc-core.jar
+CLASSPATH=$(CURDIR)/project/po-uilib/po-uilib.jar:$(CURDIR)/project/ggc-app/ggc-app.jar:$(CURDIR)/project/ggc-core/ggc-core.jar
 
 all:
 	$(MAKE) $(MFLAGS) -C $(GGC_CORE_PATH)
