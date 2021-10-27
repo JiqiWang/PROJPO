@@ -10,7 +10,7 @@ public class Partner implements Serializable {
 
     // state missing
 
-    private double _points = 0; 
+    private double _points = 1000; 
     private double _purchasesValue = 0;
     private double _performedSalesValue = 0;
     private double _paidSalesValue = 0;
@@ -50,8 +50,10 @@ public class Partner implements Serializable {
     }
 
     public String buildAttributesString(){
-        return String.format("%s|%s|%s|%s|%s|%s|%s|%s", getID(), getName(), getAddress(), 
-        "NORMAL", getPoints(), getPurchasesValue(), getPerformedSalesValue(), getPaidSalesValue());
+        return String.format("%s|%s|%s|%s|%s|%s|%s|%s", getID(), 
+        getName(), getAddress(), "NORMAL", (int) getPoints(), 
+        (int) getPurchasesValue(), (int) getPerformedSalesValue(), 
+        (int) getPaidSalesValue());
     }
 
 

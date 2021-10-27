@@ -33,7 +33,16 @@ public class Product implements Serializable {
         return this._stock;
     }
 
+    public void setPrice(double price){
+        this._price = price;
+    }
+
+    public void addStock(double amount){
+        _stock += amount;
+    }
+
     public String buildAttributesString(){
-        return String.format("%s|%s|%s", getID(), getPrice(), getStock());
+        return String.format("%s|%s|%s", getID(), (int) getPrice(), 
+        (int) getStock());
     }
 }
