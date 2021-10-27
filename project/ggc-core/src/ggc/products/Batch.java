@@ -33,6 +33,6 @@ public class Batch {
 
     public String buildAttributesString(){
         return String.format("%s|%s|%s|%s", getProductID(), 
-        getPartnerID(), (int) getPrice(), (int) getStock());
+        getPartnerID(), Math.round(getPrice()), Math.round(getStock()));
     }
 }

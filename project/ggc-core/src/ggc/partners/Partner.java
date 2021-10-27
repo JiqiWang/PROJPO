@@ -10,7 +10,7 @@ public class Partner implements Serializable {
 
     // state missing
 
-    private double _points = 1000; 
+    private double _points = 0; 
     private double _purchasesValue = 0;
     private double _performedSalesValue = 0;
     private double _paidSalesValue = 0;

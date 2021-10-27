@@ -42,7 +42,7 @@ public class Product implements Serializable {
     }
 
     public String buildAttributesString(){
-        return String.format("%s|%s|%s", getID(), (int) getPrice(), 
-        (int) getStock());
+        return String.format("%s|%s|%s", getID(), Math.round(getPrice()), 
+        Math.round(getStock()));
     }
 }

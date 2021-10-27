@@ -19,6 +19,8 @@ import ggc.products.Batch;
 import ggc.products.ComplexProduct;
 import ggc.products.Product;
 import ggc.utils.BatchComparator;
+import ggc.utils.BatchComparatorPrice;
+import ggc.utils.ProductComparator;
 
 /**
  * Class Warehouse implements a warehouse.
@@ -31,7 +33,7 @@ public class Warehouse implements Serializable {
 	private static final long serialVersionUID = 202109192006L;
 
 	// A TreeMap is used so the IDs are inserted by alphabetical order.
-	private TreeMap<String, Partner> _partners = new TreeMap<>();
+	private TreeMap<String, Partner> _partners = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
 	private TreeMap<String, ArrayList<Batch>> _batchesByProduct = new TreeMap<>();
 	private TreeMap<String, ArrayList<Batch>> _batchesByPartner = new TreeMap<>();
@@ -101,7 +103,7 @@ public class Warehouse implements Serializable {
 
   	public void advanceDate(int amount) throws InvalidDateExceptionCore { 
     	// should probably add another exception, InvalidAmountException for example
-    	if(amount < 0){
+    	if(amount <= 0){
       		throw new InvalidDateExceptionCore();
     	} else {
       		setDate(_date + amount);
@@ -124,7 +126,6 @@ public class Warehouse implements Serializable {
     	if(!_partners.keySet().contains(id)){
       		throw new UnknownPartnerKeyExceptionCore();
 		}
-
     	return _partners.get(id).buildAttributesString();
   	}
 
@@ -192,6 +193,7 @@ public class Warehouse implements Serializable {
 		addBatchByPartner(newBatch);
 		addBatchByProduct(newBatch);
 		Collections.sort(_batches, new BatchComparator());
+		Collections.sort(_batches, new BatchComparatorPrice());
 	}
 
 	public void registerBatch(String productID, String partnerID, 
@@ -205,6 +207,7 @@ public class Warehouse implements Serializable {
 		addBatchByPartner(newBatch);
 		addBatchByProduct(newBatch);
 		Collections.sort(_batches, new BatchComparator());
+		Collections.sort(_batches, new BatchComparatorPrice());
 	}
 
 	public List<Batch> getAvailableBatches(){
@@ -212,7 +215,9 @@ public class Warehouse implements Serializable {
 	}
 
 	public List<Product> getAllProducts(){
-		return new ArrayList<>(_products.values());
+		ArrayList<Product> _result = new ArrayList<>(_products.values());
+		Collections.sort(_result, new ProductComparator());
+		return _result;
 	}
 
 }
