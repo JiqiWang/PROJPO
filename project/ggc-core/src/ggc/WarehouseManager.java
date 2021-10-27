@@ -11,8 +11,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-// import javax.swing.plaf.basic.BasicScrollPaneUI.ViewportChangeHandler;
-
 import ggc.exceptions.BadEntryException;
 import ggc.exceptions.DuplicatePartnerKeyExceptionCore;
 import ggc.exceptions.ImportFileException;
@@ -70,6 +68,9 @@ public class WarehouseManager {
   	public void load(String filename) throws UnavailableFileException {
     	
 		try{
+			if(this.hasNoFile()){
+				throw new UnavailableFileException(filename);
+			} 
 			ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
 			this.setWarehouse((Warehouse) oi.readObject());
 			oi.close();

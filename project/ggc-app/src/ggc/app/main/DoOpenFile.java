@@ -3,7 +3,7 @@ package ggc.app.main;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 import ggc.WarehouseManager;
-
+import ggc.app.exceptions.FileOpenFailedException;
 import ggc.exceptions.UnavailableFileException;
 
 /**
@@ -21,8 +21,8 @@ class DoOpenFile extends Command<WarehouseManager> {
   public final void execute() throws CommandException {
     try {
       _receiver.load(stringField("filename"));
-    } catch (UnavailableFileException e) {
-      e.printStackTrace();
+    } catch (UnavailableFileException ufe) {
+      throw new FileOpenFailedException(ufe.getFilename());
     }
   }
 
