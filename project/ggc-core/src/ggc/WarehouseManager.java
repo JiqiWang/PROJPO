@@ -35,10 +35,6 @@ public class WarehouseManager {
   	/** The warehouse itself. */
   	private Warehouse _warehouse = new Warehouse();
 
-  	//FIXME define other attributes
-  	//FIXME define constructor(s)
-  	//FIXME define other methods
-
   	/**
    	* @@throws IOException
    	* @@throws FileNotFoundException
@@ -106,6 +102,10 @@ public class WarehouseManager {
 	public void setWarehouse(Warehouse warehouse){
     	this._warehouse = warehouse;
   	}
+
+	public boolean hasNoFile(){
+		return _filename.equals("");
+	}
 
   	public int displayDate(){
     	return getCurrentWarehouse().getDate();

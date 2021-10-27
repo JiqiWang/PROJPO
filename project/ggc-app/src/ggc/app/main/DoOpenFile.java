@@ -3,7 +3,8 @@ package ggc.app.main;
 import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 import ggc.WarehouseManager;
-//FIXME import classes
+
+import ggc.exceptions.UnavailableFileException;
 
 /**
  * Open existing saved state.
@@ -18,13 +19,11 @@ class DoOpenFile extends Command<WarehouseManager> {
 
   @Override
   public final void execute() throws CommandException {
-    /*
     try {
-      //FIXME implement command
-    } catch (UnavailableFileException ufe) {
-      throw new FileOpenFailedException(ufe.getFilename());
+      _receiver.load(stringField("filename"));
+    } catch (UnavailableFileException e) {
+      e.printStackTrace();
     }
-    */
   }
 
 }
