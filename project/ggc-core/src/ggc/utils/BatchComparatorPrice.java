@@ -18,8 +18,6 @@ public class BatchComparatorPrice  implements Comparator<Batch>{
         int priceCompare = price1.compareTo(price2);
         int stockCompare = stock1.compareTo(stock2);
 
-
-
         if(product1.compareTo(product2) == 0 & partner1.compareTo(partner2) == 0){
 
             return (priceCompare == 0) ? stockCompare : priceCompare;

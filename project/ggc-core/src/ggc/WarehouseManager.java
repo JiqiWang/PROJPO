@@ -21,8 +21,6 @@ import ggc.exceptions.UnknownPartnerKeyExceptionCore;
 import ggc.products.Batch;
 import ggc.products.Product;
 
-//FIXME import classes (cannot import from pt.tecnico or ggc.app)
-
 /** Façade for access. */
 
 public class WarehouseManager {
@@ -68,18 +66,14 @@ public class WarehouseManager {
   	public void load(String filename) throws UnavailableFileException {
     	
 		try{
-			if(this.hasNoFile()){
-				throw new UnavailableFileException(filename);
-			} 
 			ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
 			this.setWarehouse((Warehouse) oi.readObject());
 			oi.close();
 			this._filename = filename;
 		} catch (IOException e){
-			// do something
-			e.printStackTrace();
+			throw new UnavailableFileException(filename);
 		} catch (ClassNotFoundException e){
-			e.printStackTrace();
+			throw new UnavailableFileException(filename);
 		}
 
   	}
@@ -91,7 +85,7 @@ public class WarehouseManager {
   	public void importFile(String textfile) throws ImportFileException {
     	try {
 	    	_warehouse.importFile(textfile);
-    	} catch (IOException | BadEntryException /* maybe other exceptions */ e) {
+    	} catch (IOException | BadEntryException e) {
 	    	throw new ImportFileException(textfile);
  		}
   	}
