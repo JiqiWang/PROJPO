@@ -1,6 +1,8 @@
 package ggc.products;
 
-public class Batch {
+import java.io.Serializable;
+
+public class Batch implements Serializable {
 
     private String _productID;
     private String _partnerID;
