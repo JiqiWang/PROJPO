@@ -1,5 +1,8 @@
 package ggc;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,8 +19,6 @@ import ggc.products.Batch;
 import ggc.products.ComplexProduct;
 import ggc.products.Product;
 import ggc.utils.BatchComparator;
-
-// FIXME import classes (cannot import from pt.tecnico or ggc.app)
 
 /**
  * Class Warehouse implements a warehouse.
@@ -47,9 +48,43 @@ public class Warehouse implements Serializable {
    	* @param txtfile filename to be loaded.
    	* @throws IOException
    	* @throws BadEntryException
+	 * @throws DuplicatePartnerKeyExceptionCore
    	*/
-  	void importFile(String txtfile) throws IOException, BadEntryException /* FIXME maybe other exceptions */ {
-    	//FIXME implement method
+  	void importFile(String txtfile) throws IOException, BadEntryException {
+    	try (BufferedReader in = new BufferedReader(new FileReader(txtfile))) {
+			String s;
+			while ((s = in.readLine()) != null) {
+			  String line = new String(s.getBytes(), "UTF-8");
+	  
+			  String[] fields = line.split("\\|");
+			  switch (fields[0]) {
+			  case "PARTNER":
+				try {
+					registerPartner(fields[1], fields[2], fields[3]);
+				} catch (DuplicatePartnerKeyExceptionCore e) {
+					e.printStackTrace();
+				}
+				break;
+			  case "BATCH_S": 
+			  	registerBatch(fields[1], fields[2], 
+			  	Double.parseDouble(fields[3]), Double.parseDouble(fields[4]));
+				break;
+			  case "BATCH_M": 
+			  	registerBatch(fields[1], fields[2], 
+			  	Double.parseDouble(fields[3]), Double.parseDouble(fields[4]), 
+			  	Double.parseDouble(fields[5]), fields[6]);
+			  	break;
+			  default: 
+			  	throw new BadEntryException(fields[0]);
+			  }
+			}
+		  } catch (FileNotFoundException e) {
+			e.printStackTrace();
+		  } catch (IOException e) {
+			e.printStackTrace();
+		  } catch (BadEntryException e) {
+			e.printStackTrace();
+		  }
   	}
 
   	public int getDate(){

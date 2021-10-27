@@ -9,7 +9,7 @@ import ggc.exceptions.ImportFileException;
 public class App {
 
   /** @param args command line arguments. */
-  public static void main(String[] args) {
+  public static void main(String[] args){
     try (var ui = Dialog.UI) {
       WarehouseManager manager = new WarehouseManager();
 
@@ -22,7 +22,6 @@ public class App {
           e.printStackTrace();
         }
       }
-
       Menu menu = new ggc.app.main.Menu(manager);
       menu.open();
     }
