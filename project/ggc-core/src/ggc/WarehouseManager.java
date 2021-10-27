@@ -1,7 +1,13 @@
 package ggc;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +46,13 @@ public class WarehouseManager {
    	*/
   	public void save() throws IOException, FileNotFoundException, 
   	MissingFileAssociationException {
-    	//FIXME implement serialization method
+    	try{
+			ObjectOutputStream oo = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(_filename)));
+			oo.writeObject(this._warehouse);
+			oo.close();
+		} catch (IOException e){
+			e.printStackTrace();
+		} 
   	}
 
   	/**
@@ -60,7 +72,19 @@ public class WarehouseManager {
   	 * @@throws UnavailableFileException
    	*/
   	public void load(String filename) throws UnavailableFileException {
-    	//FIXME implement serialization method
+    	
+		try{
+			ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
+			this.setWarehouse((Warehouse) oi.readObject());
+			oi.close();
+			this._filename = filename;
+		} catch (IOException e){
+			// do something
+			e.printStackTrace();
+		} catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}
+
   	}
 
   /**
@@ -77,6 +101,10 @@ public class WarehouseManager {
 
   	public Warehouse getCurrentWarehouse(){
     	return _warehouse;
+  	}
+
+	public void setWarehouse(Warehouse warehouse){
+    	this._warehouse = warehouse;
   	}
 
   	public int displayDate(){
