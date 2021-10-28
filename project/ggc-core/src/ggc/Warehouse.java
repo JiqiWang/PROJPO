@@ -27,7 +27,7 @@ import ggc.utils.ProductComparator;
  */
 public class Warehouse implements Serializable {
 
-	private int _date = 0; // if the warehouse is loaded from a file, the date starts on its date
+	private int _date = 0;
 
 	/** Serial number for serialization. */
 	private static final long serialVersionUID = 202109192006L;
@@ -43,10 +43,11 @@ public class Warehouse implements Serializable {
 	private List<Batch> _batches = new ArrayList<>();
 
 	/**
-   	* @param txtfile filename to be loaded.
-   	* @throws IOException
-   	* @throws BadEntryException
-	 * @throws DuplicatePartnerKeyExceptionCore
+	 * Imports data from a file.
+	 * 
+   	 * @param txtfile filename to be loaded.
+   	 * @throws IOException
+   	 * @throws BadEntryException
    	*/
   	void importFile(String txtfile) throws IOException, BadEntryException {
     	try (BufferedReader in = new BufferedReader(new FileReader(txtfile))) {
@@ -84,11 +85,20 @@ public class Warehouse implements Serializable {
 			e.printStackTrace();
 		  }
   	}
-
+	
+	/**
+	 * @return the warehouse's current date.
+	 */
   	public int getDate(){
     	return _date;
   	}
 
+	/**
+	 * Changes the value of the warehouse's date.
+	 * 
+	 * @param date the warehouse's current date
+	 * @throws InvalidDateExceptionCore
+	 */
   	public void setDate(int date) throws InvalidDateExceptionCore {
     	if(date < 0){
     		throw new InvalidDateExceptionCore(); 
@@ -97,6 +107,12 @@ public class Warehouse implements Serializable {
     	}
  	}
 
+	/**
+	 * Advances the date by the given amount.
+	 * 
+	 * @param amount the amount to advance the date by
+	 * @throws InvalidDateExceptionCore if the amount to advance is zero or negative 
+	 */
   	public void advanceDate(int amount) throws InvalidDateExceptionCore { 
 
     	if(amount <= 0){
@@ -105,7 +121,17 @@ public class Warehouse implements Serializable {
       		setDate(_date + amount);
     	}
   	}
+	
 
+	/**
+	 * Creates a partner and stores it.
+	 * 
+	 * @param id the partner's id
+	 * @param name the partner's name
+	 * @param address the partner's address
+	 * @throws DuplicatePartnerKeyExceptionCore if a partner with the 
+	 *    given id already exists
+	 */  
   	public void registerPartner(String id, String name, String address) 
   	throws DuplicatePartnerKeyExceptionCore {
 
@@ -117,6 +143,14 @@ public class Warehouse implements Serializable {
     	_partners.put(id, p);
  	}
 
+	/**
+	 * Searches the partner storage for a specified partner.
+	 * 
+	 * @param id the partner's id 
+	 * @return a string with the attributes of the partner
+	 * @throws UnknownPartnerKeyExceptionCore when there isn't a partner
+	 *    with the given id
+	 */
 	public String getPartner(String id) 
   	throws UnknownPartnerKeyExceptionCore {
     	if(!_partners.keySet().contains(id)){
@@ -125,6 +159,9 @@ public class Warehouse implements Serializable {
     	return _partners.get(id).buildAttributesString();
   	}
 
+	/**
+	 * @return a list with every partner's attributes string
+	 */
   	public ArrayList<String> getAllPartners(){
 		  
     	ArrayList<String> result = new ArrayList<>();
@@ -135,6 +172,12 @@ public class Warehouse implements Serializable {
     	return result;
 	}
 
+	/**
+	 * Auxiliary function. Used to add a batch to a list of batches
+	 *    of the same product. 
+	 * 
+	 * @param batch the batch to be added
+	 */
 	private void addBatchByProduct(Batch batch){
 		if(_batchesByProduct.keySet().contains(batch.getProductID())){
 			this._batchesByProduct.get(batch.getProductID()).add(batch);
@@ -144,6 +187,12 @@ public class Warehouse implements Serializable {
 		}
 	}
 
+	/**
+	 * Auxiliary function. Used to add a batch to a list of batches
+	 *    owned by the same partner.
+	 * 
+	 * @param batch the batch to be added
+	 */
 	private void addBatchByPartner(Batch batch){
 		if(_batchesByPartner.keySet().contains(batch.getPartnerID())){
 			this._batchesByPartner.get(batch.getPartnerID()).add(batch);
@@ -153,6 +202,15 @@ public class Warehouse implements Serializable {
 		}
 	}
 
+	/**
+	 * Auxiliary function. Used to update the product storage when 
+	 *    a new simple batch is registered.
+	 * 
+	 * @param productID the product's id
+	 * @param partnerID the partner's id
+	 * @param price the price of the product
+	 * @param stock the stock of the product
+	 */
 	private void addProductFromBatch(String productID, String partnerID, 
 	double price, double stock) {
 		if(!_products.keySet().contains(productID)){
@@ -166,6 +224,15 @@ public class Warehouse implements Serializable {
 		}
 	}
 
+	/**
+	 * Auxiliary function. Used to update the product storage when 
+	 *    a new complex batch is registered.
+	 * 
+	 * @param productID the product's id
+	 * @param partnerID the partner's id
+	 * @param price the price of the product
+	 * @param stock the stock of the product
+	 */
 	private void addProductFromBatch(String productID, String partnerID, 
 	double price, double stock, double aggravation, String recipe) {
 		if(!_products.keySet().contains(productID)){
@@ -179,6 +246,15 @@ public class Warehouse implements Serializable {
 		}
 	}
 
+	/**
+	 * Creates a new simple batch and stores it. Also updates the storage
+	 *    of products.
+	 * 
+	 * @param productID the product of the batch
+	 * @param partnerID the id of the supplier of the batch
+	 * @param price the price of the batch
+	 * @param stock the amount of products in the batch
+	 */
 	public void registerBatch(String productID, String partnerID, 
 	double price, double stock){
 		Batch newBatch = new Batch(productID, partnerID, price, stock);
@@ -192,6 +268,15 @@ public class Warehouse implements Serializable {
 		Collections.sort(_batches, new BatchComparatorPrice());
 	}
 
+	/**
+	 * Creates a new complex batch and stores it. Also updates the storage
+	 *    of products.
+	 * 
+	 * @param productID the product of the batch
+	 * @param partnerID the id of the supplier of the batch
+	 * @param price the price of the batch
+	 * @param stock the amount of products in the batch
+	 */
 	public void registerBatch(String productID, String partnerID, 
 	double price, double stock, double aggravation, String recipe){
 		Batch newBatch = new Batch(productID, partnerID, price, stock);
@@ -206,10 +291,17 @@ public class Warehouse implements Serializable {
 		Collections.sort(_batches, new BatchComparatorPrice());
 	}
 
+	/**
+	 * @return the list of batches
+	 */
 	public List<Batch> getAvailableBatches(){
 		return _batches;
 	}
 
+
+	/**
+	 * @return a sorted list of every existing product
+	 */
 	public List<Product> getAllProducts(){
 		ArrayList<Product> _result = new ArrayList<>(_products.values());
 		Collections.sort(_result, new ProductComparator());

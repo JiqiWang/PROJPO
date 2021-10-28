@@ -30,7 +30,7 @@ public class WarehouseManager {
 
   	/** The warehouse itself. */
   	private Warehouse _warehouse = new Warehouse();
-
+	  
   	/**
    	* @@throws IOException
    	* @@throws FileNotFoundException
@@ -64,7 +64,7 @@ public class WarehouseManager {
   	 * @@throws UnavailableFileException
    	*/
   	public void load(String filename) throws UnavailableFileException {
-    	
+
 		try{
 			ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(new FileInputStream(filename)));
 			this.setWarehouse((Warehouse) oi.readObject());

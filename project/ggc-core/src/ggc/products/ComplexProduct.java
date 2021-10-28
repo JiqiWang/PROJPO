@@ -24,6 +24,7 @@ public class ComplexProduct extends Product {
 
     @Override
     public String buildAttributesString(){
-        return String.format("%s|%s|%s|%s|%s", getID(), (int) getPrice(), (int) getStock(), getAggravation(), getRecipe());
+        return String.format("%s|%s|%s|%s|%s", getID(), Math.round(getPrice()), 
+        Math.round(getStock()), getAggravation(), getRecipe());
     }
 }
