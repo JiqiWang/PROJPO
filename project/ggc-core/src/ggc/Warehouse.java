@@ -298,7 +298,6 @@ public class Warehouse implements Serializable {
 		return _batches;
 	}
 
-
 	/**
 	 * @return a sorted list of every existing product
 	 */

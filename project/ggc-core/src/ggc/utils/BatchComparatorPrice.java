@@ -10,7 +10,7 @@ public class BatchComparatorPrice  implements Comparator<Batch>{
     public int compare(Batch o1, Batch o2) {
         
         Double price1 = o1.getPrice(), price2 = o2.getPrice();
-        Double stock1 = o1.getStock(), stock2 = o1.getStock();
+        Double stock1 = o1.getStock(), stock2 = o2.getStock();
 
         String product1 = o1.getProductID(), product2 = o2.getProductID();
         String partner1 = o1.getPartnerID(), partner2 = o2.getPartnerID();
@@ -18,7 +18,7 @@ public class BatchComparatorPrice  implements Comparator<Batch>{
         int priceCompare = price1.compareTo(price2);
         int stockCompare = stock1.compareTo(stock2);
 
-        if(product1.compareTo(product2) == 0 & partner1.compareTo(partner2) == 0){
+        if(product1.equalsIgnoreCase(product2) & partner1.equalsIgnoreCase(partner2)){
 
             return (priceCompare == 0) ? stockCompare : priceCompare;
 

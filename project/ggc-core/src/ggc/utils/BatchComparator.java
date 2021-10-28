@@ -10,7 +10,7 @@ public class BatchComparator implements Comparator<Batch> {
     public int compare(Batch o1, Batch o2) {
 
         int productCompare = o1.getProductID().compareTo(o2.getProductID());
-        int partnerCompare = o2.getPartnerID().compareTo(o2.getPartnerID());
+        int partnerCompare = o1.getPartnerID().compareTo(o2.getPartnerID());
 
         if(productCompare == 0){
             return partnerCompare;
