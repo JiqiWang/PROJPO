@@ -4,7 +4,6 @@ import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 
 import ggc.WarehouseManager;
-//FIXME import classes
 
 /**
  * Show all partners.

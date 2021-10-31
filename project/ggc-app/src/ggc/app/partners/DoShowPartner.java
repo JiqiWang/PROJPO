@@ -4,7 +4,7 @@ import pt.tecnico.uilib.menus.Command;
 import pt.tecnico.uilib.menus.CommandException;
 import ggc.WarehouseManager;
 import ggc.app.exceptions.UnknownPartnerKeyException;
-//FIXME import classes
+
 import ggc.exceptions.UnknownPartnerKeyExceptionCore;
 
 /**

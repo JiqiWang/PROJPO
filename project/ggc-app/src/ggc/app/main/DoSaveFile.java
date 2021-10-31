@@ -8,15 +8,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import ggc.WarehouseManager;
-//FIXME import classes
+
 import ggc.exceptions.MissingFileAssociationException;
 
 /**
  * Save current state to file under current name (if unnamed, query for name).
  */
 class DoSaveFile extends Command<WarehouseManager> {
-
-  private String _filename = "";
 
   /** @param receiver */
   DoSaveFile(WarehouseManager receiver) {
@@ -28,7 +26,7 @@ class DoSaveFile extends Command<WarehouseManager> {
 
     if(_receiver.hasNoFile()){
       try {
-        _filename = Form.requestString(Prompt.newSaveAs());
+        String _filename = Form.requestString(Prompt.newSaveAs());
         _receiver.saveAs(_filename);
       } catch (FileNotFoundException e) {
         e.printStackTrace();

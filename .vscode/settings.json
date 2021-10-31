@@ -3,5 +3,8 @@
         "project/ggc-core/src",
         "project/ggc-app/src",
         "project/po-uilib/src"
-    ]
+    ],
+    "files.exclude": {
+        "**/.class": true
+    }
 }
